@@ -23,7 +23,7 @@ TextField textMoeda(String label, String prefix,
       fontSize: 25.0,
     ),
     onChanged: f,
-    keyboardType: TextInputType.number,
+    keyboardType: TextInputType.numberWithOptions(decimal: true),
   );
 }
 
@@ -64,14 +64,23 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
   final realController = TextEditingController();
   final dolarController = TextEditingController();
   final euroController = TextEditingController();
   var conversor = ConversorDeMoeda();
 
+  void clearAll() {
+    realController.text = "";
+    dolarController.text = "";
+    euroController.text = "";
+  }
+
   void _realChanged(String text) {
-    //double real = double.parse(text);
+    if (text.isEmpty) {
+      clearAll();
+      return;
+    }
+    
     dolarController.text =
         conversor.converter(text, 'BRL', 'USD').toStringAsFixed(2);
     euroController.text =
@@ -79,7 +88,11 @@ class _HomeState extends State<Home> {
   }
 
   void _dolarChanged(String text) {
-    //double dolar = double.parse(text);
+    if (text.isEmpty) {
+      clearAll();
+      return;
+    }
+
     realController.text =
         conversor.converter(text, 'USD', 'BRL').toStringAsFixed(2);
     euroController.text =
@@ -87,7 +100,11 @@ class _HomeState extends State<Home> {
   }
 
   void _euroChanged(String text) {
-    //double euro = double.parse(text);
+    if (text.isEmpty) {
+      clearAll();
+      return;
+    }
+    
     dolarController.text =
         conversor.converter(text, 'EUR', 'USD').toStringAsFixed(2);
     realController.text =
@@ -136,8 +153,8 @@ class _HomeState extends State<Home> {
                   var dolar = snapshot.data?["results"]["currencies"]['USD'];
                   var euro = snapshot.data?["results"]["currencies"]["EUR"];
                   conversor.cotacao = {
-                    'USD': dolar, 
-                    'EUR': euro, 
+                    'USD': dolar,
+                    'EUR': euro,
                     'BRL': {
                       'sell': 1,
                       'buy': 1,
