@@ -141,7 +141,7 @@ class _HomeState extends State<Home> {
                   print(snapshot.error);
                   return Center(
                     child: Text(
-                      "Erro de carregamento de dados!",
+                      "${snapshot.error}",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.red,
