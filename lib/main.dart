@@ -34,7 +34,6 @@ SizedBox box() {
 }
 
 void main() async {
-  //print(await getData());
 
   runApp(MaterialApp(
     home: Home(),
