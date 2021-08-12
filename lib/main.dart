@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
-
+// commentario bugado
 var request = Uri.https(
     'api.hgbrasil.com', '/finance', {'key': 'a02463a6', 'symbol': 'bidi4'});
 //'https://api.hgbrasil.com/finance?key=a02463a6&symbol=bidi4'
